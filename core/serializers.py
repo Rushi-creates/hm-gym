@@ -12,7 +12,7 @@ class MemberProfileSerializer(ModelSerializer):
         fields = '__all__'
         # fields = [ 'id' , 'bio' , 'userName' , 'uid']
 
-# class GymTrackSerializer(ModelSerializer):
-#     class Meta:
-#         model = GymTrack
-#         fields = '__all__'
+class GymTrackSerializer(ModelSerializer):
+    class Meta:
+        model = GymTrack
+        fields = '__all__'
