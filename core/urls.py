@@ -18,13 +18,13 @@ urlpatterns = [
     path('memberProfile/update/<int:id>/', views.updateMemberProfile),
     path('memberProfile/delete/<int:id>/', views.deleteMemberProfile),
    
-    #! GYM TRACK  paths ( here uid prop id setted as primary key)
-    path('gymTrack/', views.getGymTrack),
-    path('gymTrack/<int:id>/', views.getSingleGymTrack),
-    path('gymTrack/add/', views.addGymTrack),
-    path('gymTrack/update/<int:id>/', views.updateGymTrack),
-    path('gymTrack/delete/<int:id>/', views.deleteGymTrack),
-    path('gymTrack/deleteByUid/<int:uid>/', views.deleteGymTrackByUid), # delete by uid ( dont need now as uid=id)
+    # #! GYM TRACK  paths ( here uid prop id setted as primary key)
+    # path('gymTrack/', views.getGymTrack),
+    # path('gymTrack/<int:id>/', views.getSingleGymTrack),
+    # path('gymTrack/add/', views.addGymTrack),
+    # path('gymTrack/update/<int:id>/', views.updateGymTrack),
+    # path('gymTrack/delete/<int:id>/', views.deleteGymTrack),
+    # path('gymTrack/deleteByUid/<int:uid>/', views.deleteGymTrackByUid), # delete by uid ( dont need now as uid=id)
 
 
 ]

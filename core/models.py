@@ -26,22 +26,22 @@ class MemberProfile(models.Model):
     m_uid = models.OneToOneField(AuthUser , on_delete=models.CASCADE, related_name='muid', primary_key=True) # uid setted as pk
 
 
-#! using filter method , coz one account can have multiple objects of this class
-class GymTrack(models.Model):
-    g_uid = models.ForeignKey(AuthUser , on_delete=models.CASCADE, related_name='guid') # filter search by ui
-    recordDate = models.CharField(max_length=20)   # filter search , by date to separate monthly track
-    weight = models.IntegerField(default=0)
-    height = models.IntegerField(default=0)
-    neck = models.IntegerField(default=0)
-    shoulder = models.IntegerField(default=0)
-    chest = models.IntegerField(default=0)
-    upperArm = models.IntegerField(default=0)
-    forearm = models.IntegerField(default=0)
-    upperAbdomen = models.IntegerField(default=0)
-    lowerAbdomen = models.IntegerField(default=0)
-    waist = models.IntegerField(default=0)
-    hips = models.IntegerField(default=0)
-    thighs = models.IntegerField(default=0)
-    calf = models.IntegerField(default=1)
+# #! using filter method , coz one account can have multiple objects of this class
+# class GymTrack(models.Model):
+#     g_uid = models.ForeignKey(AuthUser , on_delete=models.CASCADE, related_name='guid') # filter search by ui
+#     recordDate = models.CharField(max_length=20)   # filter search , by date to separate monthly track
+#     weight = models.IntegerField(default=0)
+#     height = models.IntegerField(default=0)
+#     neck = models.IntegerField(default=0)
+#     shoulder = models.IntegerField(default=0)
+#     chest = models.IntegerField(default=0)
+#     upperArm = models.IntegerField(default=0)
+#     forearm = models.IntegerField(default=0)
+#     upperAbdomen = models.IntegerField(default=0)
+#     lowerAbdomen = models.IntegerField(default=0)
+#     waist = models.IntegerField(default=0)
+#     hips = models.IntegerField(default=0)
+#     thighs = models.IntegerField(default=0)
+#     calf = models.IntegerField(default=1)
 
 

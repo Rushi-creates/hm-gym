@@ -6,7 +6,8 @@ class AccountFilters(django_filters.FilterSet):
         model = AuthUser
         fields = '__all__'
 
-class GymTrackFilters(django_filters.FilterSet):
-    class Meta: 
-        model = GymTrack
-        fields = ['recordDate', 'g_uid']
+# class GymTrackFilters(django_filters.FilterSet):
+#     class Meta: 
+#         model = GymTrack
+#         fields = '__all__'
+#         # fields = ['recordDate', 'g_uid']

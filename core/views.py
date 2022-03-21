@@ -1,7 +1,7 @@
 #from appNameFolder.fileName import func/className
-from core.models import GymTrack , AuthUser,MemberProfile
-from core.serializers import GymTrackSerializer,AuthUserSerializer,MemberProfileSerializer
-from .filters import AccountFilters, GymTrackFilters
+from core.models import   AuthUser,MemberProfile
+from core.serializers import AuthUserSerializer,MemberProfileSerializer
+from .filters import AccountFilters 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -105,59 +105,59 @@ def deleteMemberProfile(request,id):
 #     return Response(f"Deleted by uid {uid}")
 
 
-# ---------------------------------------------------------------------------- #
-#                                //! GYM TRACK DB                              #
-# ---------------------------------------------------------------------------- #
-@api_view(['POST'])
-def addGymTrack(request):
-    userObj = GymTrackSerializer(data=request.data)
-    if userObj.is_valid():
-        print('valid')
-        userObj.save()
-    print(userObj.data)
-    return Response(userObj.data)
+# # ---------------------------------------------------------------------------- #
+# #                                //! GYM TRACK DB                              #
+# # ---------------------------------------------------------------------------- #
+# @api_view(['POST'])
+# def addGymTrack(request):
+#     userObj = GymTrackSerializer(data=request.data)
+#     if userObj.is_valid():
+#         print('valid')
+#         userObj.save()
+#     print(userObj.data)
+#     return Response(userObj.data)
 
+# # @api_view(['GET'])
+# # def getGymTrack(request):
+# #     userObj = GymTrack.objects.all()
+# #     serializer = GymTrackSerializer(userObj,many=True)
+# #     return Response(serializer.data)
+
+# # filter , ( to filter with recordData field )
 # @api_view(['GET'])
 # def getGymTrack(request):
 #     userObj = GymTrack.objects.all()
-#     serializer = GymTrackSerializer(userObj,many=True)
+#     filteredData = GymTrackFilters(request.GET, queryset = userObj).qs # gives filter search options from filters.py
+#     serializer = GymTrackSerializer(filteredData,many=True)
 #     return Response(serializer.data)
 
-# filter , ( to filter with recordData field )
-@api_view(['GET'])
-def getGymTrack(request):
-    userObj = GymTrack.objects.all()
-    filteredData = GymTrackFilters(request.GET, queryset = userObj).qs # gives filter search options from filters.py
-    serializer = GymTrackSerializer(filteredData,many=True)
-    return Response(serializer.data)
+
+# @api_view(['GET'])
+# def getSingleGymTrack(request,id):
+#     userObj = GymTrack.objects.get(g_uid=id)
+#     serializer = GymTrackSerializer(instance=userObj)
+#     return Response(serializer.data)
+
+# @api_view(['PUT'])
+# def updateGymTrack(request,id):
+#     userObj = GymTrack.objects.get(g_uid=id)
+#     serializers = GymTrackSerializer(instance=userObj, data=request.data)
+#     if serializers.is_valid():
+#         serializers.save()
+#     return Response(serializers.data)
+
+# @api_view(['DELETE' , 'GET'])
+# def deleteGymTrack(request,id):
+#     userObj = GymTrack.objects.get(g_uid=id)  #! make sure to chaneg id , to g_uid here
+#     userObj.delete()
+#     return Response(f"Deleted {id}")
 
 
-@api_view(['GET'])
-def getSingleGymTrack(request,id):
-    userObj = GymTrack.objects.get(g_uid=id)
-    serializer = GymTrackSerializer(instance=userObj)
-    return Response(serializer.data)
-
-@api_view(['PUT'])
-def updateGymTrack(request,id):
-    userObj = GymTrack.objects.get(g_uid=id)
-    serializers = GymTrackSerializer(instance=userObj, data=request.data)
-    if serializers.is_valid():
-        serializers.save()
-    return Response(serializers.data)
-
-@api_view(['DELETE' , 'GET'])
-def deleteGymTrack(request,id):
-    userObj = GymTrack.objects.get(g_uid=id)  #! make sure to chaneg id , to g_uid here
-    userObj.delete()
-    return Response(f"Deleted {id}")
-
-
-# dont need this here , as uid and id are the same 
-@api_view(['DELETE' , 'GET'])
-def deleteGymTrackByUid(request,uid):
-    userObj = GymTrack.objects.get(g_uid=uid)  #! just changed uid here 
-    userObj.delete()
-    return Response(f"Deleted by uid {uid}")
+# # dont need this here , as uid and id are the same 
+# @api_view(['DELETE' , 'GET'])
+# def deleteGymTrackByUid(request,uid):
+#     userObj = GymTrack.objects.get(g_uid=uid)  #! just changed uid here 
+#     userObj.delete()
+#     return Response(f"Deleted by uid {uid}")
 
 
