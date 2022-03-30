@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
 
+    path('account/login/', views.loginAccount),  # return true/false ( after checking if account exists)
 
     #!  ACCOUNTS -register paths 
     path('account/', views.getAllAccounts),

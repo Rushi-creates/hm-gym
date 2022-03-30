@@ -11,6 +11,32 @@ from rest_framework.response import Response
 #                                   //! Auth                                   #
 # ---------------------------------------------------------------------------- #
 
+
+@api_view(['POST'])
+def loginAccount(request):
+
+    if request.method =='POST':
+        #! using get() method of py dict(to access value, by using the key), and store it in var
+        myemail =request.data.get('email')
+        mypass = request.data.get('password')
+
+        #! filtering db prop based on request sent by frontend
+        dbEmail =AuthUser.objects.filter(email=myemail)
+        dbPass =AuthUser.objects.filter(password= mypass)
+
+        #! checking if account exists in DB
+        if dbEmail.exists() and dbPass.exists() :
+            return Response(True)  # email & pass right
+        else:
+            return Response(False)  # email and pass wrong
+
+             #! (IMP) if account dont exisits , then register the account
+             #! use this , when you want to include login & register functionality in one button 
+            # userObj = AuthUserSerializer(data=request.data)
+            # if userObj.is_valid():
+            #     userObj.save()
+            #     return Response(userObj.data)
+
 @api_view(['POST'])
 def registerAccount(request):
     userObj = AuthUserSerializer(data=request.data)
