@@ -11,22 +11,44 @@ from rest_framework.response import Response
 #                                   //! Auth                                   #
 # ---------------------------------------------------------------------------- #
 
-
+# ! (IMP) this method registers acc in DB in if account doesnt exists ( and return added obj)
+# ! and logs in( means return exisiting obj ) if account already exisits 
 @api_view(['POST'])
-def loginAccount(request):
-
+def loginOrRegister(request):
     if request.method =='POST':
         #! using get() method of py dict(to access value, by using the key), and store it in var
         myemail =request.data.get('email')
         mypass = request.data.get('password')
 
-        #! filtering db prop based on request sent by frontend
-        dbEmail =AuthUser.objects.filter(email=myemail)
-        dbPass =AuthUser.objects.filter(password= mypass)
+        #! checking if account exists in DB ( login - return exisiting acc)
+        if AuthUser.objects.filter(email=myemail).exists() and AuthUser.objects.filter(password= mypass).exists() :
+            #if its exists get full object based on email and pass , and return it  
+            userObj = AuthUser.objects.get(email=myemail, password =mypass)
+            serializer = AuthUserSerializer(instance=userObj)
+            return Response(serializer.data)
+        else:
+             #! (IMP) if account dont exisits , then register the account(returns added acc )
+             #! use this , when you want to include login & register functionality in one button 
+            userObj = AuthUserSerializer(data=request.data)
+            if userObj.is_valid():
+                userObj.save()
+                return Response(userObj.data)
+
+
+
+@api_view(['POST'])
+def loginAccount(request):
+    if request.method =='POST':
+        #! using get() method of py dict(to access value, by using the key), and store it in var
+        myemail =request.data.get('email')
+        mypass = request.data.get('password')
 
         #! checking if account exists in DB
-        if dbEmail.exists() and dbPass.exists() :
-            return Response(True)  # email & pass right
+        if AuthUser.objects.filter(email=myemail).exists() and AuthUser.objects.filter(password= mypass).exists() :
+            #if its exists get full object based on email and pass , and return it  
+            userObj = AuthUser.objects.get(email=myemail, password =mypass)
+            serializer = AuthUserSerializer(instance=userObj)
+            return Response(serializer.data)
         else:
             return Response(False)  # email and pass wrong
 
@@ -39,10 +61,25 @@ def loginAccount(request):
 
 @api_view(['POST'])
 def registerAccount(request):
-    userObj = AuthUserSerializer(data=request.data)
-    if userObj.is_valid():
-        userObj.save()
-    return Response(userObj.data)
+    if request.method =='POST':
+        #! using get() method of py dict(to access value, by using the key), and store it in var
+        myemail =request.data.get('email')
+        mypass = request.data.get('password')
+
+        #! checking if account exists in DB
+        if AuthUser.objects.filter(email=myemail).exists() and AuthUser.objects.filter(password= mypass).exists() :
+            return Response(False)  # email and pass wrong
+            #! ( do this if w want to return the object , that exists)
+            # !if its exists get full object based on email and pass , and return it  
+            # userObj = AuthUser.objects.get(email=myemail, password =mypass)
+            # serializer = AuthUserSerializer(instance=userObj)
+            # return Response(serializer.data)
+        else:
+            userObj = AuthUserSerializer(data=request.data)
+            if userObj.is_valid():
+                userObj.save()
+            return Response(userObj.data)
+
 
 @api_view(['GET'])
 def getAllAccounts(request):

@@ -3,6 +3,10 @@ from . import views
 
 urlpatterns = [
 
+    # returns acc if acc already exists in DB
+    # adds acc in DB , and return added acc ( if acc doesnt exists in DB)
+    path('account/loginOrRegister/', views.loginOrRegister),
+
     path('account/login/', views.loginAccount),  # return true/false ( after checking if account exists)
 
     #!  ACCOUNTS -register paths 
