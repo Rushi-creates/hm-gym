@@ -52,12 +52,7 @@ def loginAccount(request):
         else:
             return Response(False)  # email and pass wrong
 
-             #! (IMP) if account dont exisits , then register the account
-             #! use this , when you want to include login & register functionality in one button 
-            # userObj = AuthUserSerializer(data=request.data)
-            # if userObj.is_valid():
-            #     userObj.save()
-            #     return Response(userObj.data)
+
 
 @api_view(['POST'])
 def registerAccount(request):
@@ -69,11 +64,6 @@ def registerAccount(request):
         #! checking if account exists in DB
         if AuthUser.objects.filter(email=myemail).exists() and AuthUser.objects.filter(password= mypass).exists() :
             return Response(False)  # email and pass wrong
-            #! ( do this if w want to return the object , that exists)
-            # !if its exists get full object based on email and pass , and return it  
-            # userObj = AuthUser.objects.get(email=myemail, password =mypass)
-            # serializer = AuthUserSerializer(instance=userObj)
-            # return Response(serializer.data)
         else:
             userObj = AuthUserSerializer(data=request.data)
             if userObj.is_valid():
@@ -197,13 +187,13 @@ def getGymTrack(request):
 
 @api_view(['GET'])
 def getSingleGymTrack(request,id):
-    userObj = GymTrack.objects.get(g_uid=id)
+    userObj = GymTrack.objects.get(id=id)
     serializer = GymTrackSerializer(instance=userObj)
     return Response(serializer.data)
 
 @api_view(['PUT'])
 def updateGymTrack(request,id):
-    userObj = GymTrack.objects.get(g_uid=id)
+    userObj = GymTrack.objects.get(id=id)
     serializers = GymTrackSerializer(instance=userObj, data=request.data)
     if serializers.is_valid():
         serializers.save()
