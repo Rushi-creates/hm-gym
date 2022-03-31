@@ -201,7 +201,7 @@ def updateGymTrack(request,id):
 
 @api_view(['DELETE' , 'GET'])
 def deleteGymTrack(request,id):
-    userObj = GymTrack.objects.get(g_uid=id)  #! make sure to chaneg id , to g_uid here
+    userObj = GymTrack.objects.get(id=id)  #! make sure to chaneg id , to g_uid here
     userObj.delete()
     return Response(f"Deleted {id}")
 
