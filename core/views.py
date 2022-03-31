@@ -213,4 +213,3 @@ def deleteGymTrackByUid(request,uid):
     userObj.delete()
     return Response(f"Deleted by uid {uid}")
 
-
