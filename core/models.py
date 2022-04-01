@@ -5,6 +5,7 @@ class AuthUser(models.Model):
     email = models.CharField(max_length=20,default="no value")
     password = models.CharField(max_length=20,default="no value")  
     isAdmin = models.BooleanField(default=False)
+    isAdminVerified = models.BooleanField(default=False) # to turn to true by superAdmin
 
 #! using OneToOneField , coz one account can have only profile ( user can create one rowObj of this class )
 class MemberProfile(models.Model):
