@@ -23,7 +23,7 @@ urlpatterns = [
     path('memberProfile/update/<int:id>/', views.updateMemberProfile),
     path('memberProfile/delete/<int:id>/', views.deleteMemberProfile),
    
-    #! GYM TRACK  paths ( here uid prop id setted as primary key)
+    #! GYM TRACK  paths ( here uid prop id setted as Foreign key)
     path('gymTrack/', views.getGymTrack),
     path('gymTrack/<int:id>/', views.getSingleGymTrack),
     path('gymTrack/add/', views.addGymTrack),
@@ -31,6 +31,13 @@ urlpatterns = [
     path('gymTrack/delete/<int:id>/', views.deleteGymTrack),
     path('gymTrack/deleteByUid/<int:uid>/', views.deleteGymTrackByUid), # delete by uid ( dont need now as uid=id)
 
+    #! ATTENDANCE  paths ( here uid prop id setted as Foreign key)
+    path('attendance/', views.getAttendance),
+    path('attendance/<int:id>/', views.getSingleAttendance),
+    path('attendance/add/', views.addAttendance),
+    path('attendance/update/<int:id>/', views.updateAttendance),
+    path('attendance/delete/<int:id>/', views.deleteAttendance),
+    path('attendance/deleteByUid/<int:uid>/', views.deleteAttendanceByUid), # delete by uid ( dont need now as uid=id)
 
 ]
 

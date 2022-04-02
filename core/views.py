@@ -1,7 +1,7 @@
 #from appNameFolder.fileName import func/className
-from core.models import   AuthUser, GymTrack,MemberProfile
-from core.serializers import AuthUserSerializer, GymTrackSerializer,MemberProfileSerializer
-from .filters import AccountFilters, GymTrackFilters 
+from core.models import   Attendance, AuthUser, GymTrack,MemberProfile
+from core.serializers import AttendanceSerializer, AuthUserSerializer, GymTrackSerializer,MemberProfileSerializer
+from .filters import AccountFilters, AttendanceFilters, GymTrackFilters 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -213,3 +213,59 @@ def deleteGymTrackByUid(request,uid):
     userObj.delete()
     return Response(f"Deleted by uid {uid}")
 
+
+
+# ---------------------------------------------------------------------------- #
+#                              //! ATTENDANCE DB                               #
+# ---------------------------------------------------------------------------- #
+@api_view(['POST'])
+def addAttendance(request):
+    userObj = AttendanceSerializer(data=request.data)
+    if userObj.is_valid():
+        print('valid')
+        userObj.save()
+    print(userObj.data)
+    return Response(userObj.data)
+
+# @api_view(['GET'])
+# def getAttendance(request):
+#     userObj = Attendance.objects.all()
+#     serializer = AttendanceSerializer(userObj,many=True)
+#     return Response(serializer.data)
+
+# filter , ( to filter with recordData field )
+@api_view(['GET'])
+def getAttendance(request):
+    userObj = Attendance.objects.all()
+    filteredData = AttendanceFilters(request.GET, queryset = userObj).qs # gives filter search options from filters.py
+    serializer = AttendanceSerializer(filteredData,many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getSingleAttendance(request,id):
+    userObj = Attendance.objects.get(id=id)
+    serializer = AttendanceSerializer(instance=userObj)
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateAttendance(request,id):
+    userObj = Attendance.objects.get(id=id)
+    serializers = AttendanceSerializer(instance=userObj, data=request.data)
+    if serializers.is_valid():
+        serializers.save()
+    return Response(serializers.data)
+
+@api_view(['DELETE' , 'GET'])
+def deleteAttendance(request,id):
+    userObj = Attendance.objects.get(id=id)  #! make sure to chaneg id , to g_uid here
+    userObj.delete()
+    return Response(f"Deleted {id}")
+
+
+# dont need this here , as uid and id are the same 
+@api_view(['DELETE' , 'GET'])
+def deleteAttendanceByUid(request,uid):
+    userObj = Attendance.objects.get(a_uid=uid)  #! just changed uid here 
+    userObj.delete()
+    return Response(f"Deleted by uid {uid}")

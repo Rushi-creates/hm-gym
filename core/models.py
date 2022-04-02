@@ -46,3 +46,7 @@ class GymTrack(models.Model):
     calf = models.IntegerField(default=1)
 
 
+class Attendance(models.Model):
+    a_uid = models.ForeignKey(AuthUser , on_delete=models.CASCADE, related_name='auid') # filter search by ui
+    recordDate = models.CharField(max_length=20)   # filter search , by date to separate monthly track
+

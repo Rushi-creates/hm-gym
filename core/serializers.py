@@ -16,3 +16,8 @@ class GymTrackSerializer(ModelSerializer):
     class Meta:
         model = GymTrack
         fields = '__all__'
+
+class AttendanceSerializer(ModelSerializer):
+    class Meta:
+        model = Attendance
+        fields = '__all__'
