@@ -9,7 +9,7 @@ class AuthUser(models.Model):
 
 #! using OneToOneField , coz one account can have only profile ( user can create one rowObj of this class )
 class MemberProfile(models.Model):
-    name = models.CharField(max_length=30,default="no value")
+    name = models.CharField(max_length=40,default="no value")
     bio = models.CharField(max_length=20,default="no value")
     gender = models.CharField(max_length=20,default="no value")
     age = models.IntegerField(default=1)
@@ -49,4 +49,6 @@ class GymTrack(models.Model):
 class Attendance(models.Model):
     a_uid = models.ForeignKey(AuthUser , on_delete=models.CASCADE, related_name='auid') # filter search by ui
     recordDate = models.CharField(max_length=20)   # filter search , by date to separate monthly track
+    profileName = models.CharField(max_length=40, default='no name')
+
 
