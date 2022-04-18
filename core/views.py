@@ -1,5 +1,6 @@
 #from appNameFolder.fileName import func/className
 from core.models import   Attendance, AuthUser, GymTrack,MemberProfile
+from core.myPaginations import MyCustomPagination
 from core.serializers import AttendanceSerializer, AuthUserSerializer, GymTrackSerializer,MemberProfileSerializer
 from .filters import AccountFilters, AttendanceFilters, GymTrackFilters 
 from rest_framework.decorators import api_view
@@ -71,12 +72,25 @@ def registerAccount(request):
             return Response(userObj.data)
 
 
+# @api_view(['GET'])
+# def getAllAccounts(request):
+#     userObj = AuthUser.objects.all()
+#     filteredData = AccountFilters(request.GET, queryset = userObj).qs # gives filter search options from filters.py
+#     serializer = AuthUserSerializer(filteredData,many=True)
+#     return Response(serializer.data)
+
+#! with filters and pagination ( make sure to use try-except)
 @api_view(['GET'])
 def getAllAccounts(request):
+    paginator = MyCustomPagination()
     userObj = AuthUser.objects.all()
     filteredData = AccountFilters(request.GET, queryset = userObj).qs # gives filter search options from filters.py
-    serializer = AuthUserSerializer(filteredData,many=True)
-    return Response(serializer.data)
+    try :
+        context = paginator.paginate_queryset(filteredData, request)
+        serializer = AuthUserSerializer(context,many=True)
+        return Response(serializer.data)
+    except:
+        return Response([])
 
 @api_view(['GET'])
 def getSingleAccount(request,id):
@@ -112,9 +126,15 @@ def addMemberProfile(request):
 
 @api_view(['GET'])
 def getMemberProfile(request):
+    paginator = MyCustomPagination()
     userObj = MemberProfile.objects.all()
-    serializer = MemberProfileSerializer(userObj,many=True)
-    return Response(serializer.data)
+    try :
+        context = paginator.paginate_queryset(userObj, request)
+        serializer = MemberProfileSerializer(context,many=True)
+        return Response(serializer.data)
+    except:
+        return Response([])
+
 
 
 #! dont need this as uid prop is setted as primary key , thus no need of filter search the uid
@@ -179,10 +199,15 @@ def addGymTrack(request):
 # filter , ( to filter with recordData field )
 @api_view(['GET'])
 def getGymTrack(request):
+    paginator = MyCustomPagination()
     userObj = GymTrack.objects.all()
     filteredData = GymTrackFilters(request.GET, queryset = userObj).qs # gives filter search options from filters.py
-    serializer = GymTrackSerializer(filteredData,many=True)
-    return Response(serializer.data)
+    try :
+        context = paginator.paginate_queryset(filteredData, request)
+        serializer = GymTrackSerializer(context,many=True)
+        return Response(serializer.data)
+    except:
+        return Response([])
 
 
 @api_view(['GET'])
@@ -236,10 +261,15 @@ def addAttendance(request):
 # filter , ( to filter with recordData field )
 @api_view(['GET'])
 def getAttendance(request):
+    paginator = MyCustomPagination()
     userObj = Attendance.objects.all()
     filteredData = AttendanceFilters(request.GET, queryset = userObj).qs # gives filter search options from filters.py
-    serializer = AttendanceSerializer(filteredData,many=True)
-    return Response(serializer.data)
+    try :
+        context = paginator.paginate_queryset(filteredData, request)
+        serializer = AttendanceSerializer(context,many=True)
+        return Response(serializer.data)
+    except:
+        return Response([])
 
 
 @api_view(['GET'])
