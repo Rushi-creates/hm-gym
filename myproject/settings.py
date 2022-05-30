@@ -109,15 +109,26 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 #     }
 # }
 
-# new one 
+# # new one ( for heroku postgres db)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd2kp7jcr8ok12t',
+#         'USER': 'pwtepyrpasgkya',
+#         'PASSWORD' : 'fc9b58b331d2ea3c4ac9029af9ec00d7dfcb1c3f40d3a4309901416d2ff15479',
+#         'HOST' : 'ec2-3-212-45-192.compute-1.amazonaws.com',
+#         'PORT' : '5432',
+#     }
+# }
+
+#! for pythonAnywhere mysql DB 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd2kp7jcr8ok12t',
-        'USER': 'pwtepyrpasgkya',
-        'PASSWORD' : 'fc9b58b331d2ea3c4ac9029af9ec00d7dfcb1c3f40d3a4309901416d2ff15479',
-        'HOST' : 'ec2-3-212-45-192.compute-1.amazonaws.com',
-        'PORT' : '5432',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Rushi$hmgym_db',
+        'USER': 'Rushi',
+        'PASSWORD' : 'mysql@123***',
+        'HOST' : 'Rushi.mysql.pythonanywhere-services.com',
     }
 }
 
