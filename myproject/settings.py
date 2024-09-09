@@ -98,37 +98,20 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'de6s5ckn76gn1u',
-#         'USER': 'vsnutbignmowlh',
-#         'PASSWORD' : '932deb0bd0c4bf9bd064867df0b0ecac401ce3efd81bd76238d6079ff97206b2',
-#         'HOST' : 'ec2-52-207-74-100.compute-1.amazonaws.com',
-#         'PORT' : '5432',
-#     }
-# }
 
 # # new one ( for heroku postgres db)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'd2kp7jcr8ok12t',
-#         'USER': 'pwtepyrpasgkya',
-#         'PASSWORD' : 'fc9b58b331d2ea3c4ac9029af9ec00d7dfcb1c3f40d3a4309901416d2ff15479',
-#         'HOST' : 'ec2-3-212-45-192.compute-1.amazonaws.com',
-#         'PORT' : '5432',
-#     }
-# }
 
 #! for pythonAnywhere mysql DB 
+# for supabase db 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Rushi$hmgym_db',
-        'USER': 'Rushi',
-        'PASSWORD' : 'mysql@123***',
-        'HOST' : 'Rushi.mysql.pythonanywhere-services.com',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
